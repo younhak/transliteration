@@ -33,6 +33,3 @@ def split_kor(kor_word):
 
         res = "".join(holder)
     return res
-
-
-split_kor('집에 가지마')
