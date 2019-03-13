@@ -38,26 +38,26 @@ This is not perfect for Korean pronunciation because the phonological process is
 | KOREAN(Nucleus) | ROMAN |
 | --------------- | ----- |
 | ㅏ              | a     |
-| ㅐ              |       |
-| ㅑ              |       |
-| ㅒ              |       |
-| ㅓ              |       |
-| ㅔ              |       |
-| ㅕ              |       |
-| ㅖ              |       |
-| ㅗ              |       |
-| ㅘ              |       |
-| ㅙ              |       |
-| ㅚ              |       |
-| ㅛ              |       |
-| ㅜ              |       |
-| ㅝ              |       |
-| ㅞ              |       |
-| ㅟ              |       |
-| ㅠ              |       |
-| ㅡ              |       |
-| ㅢ              |       |
-| ㅣ              |       |
+| ㅐ              | ae    |
+| ㅑ              | ya    |
+| ㅒ              | yae   |
+| ㅓ              | eo    |
+| ㅔ              | e     |
+| ㅕ              | yeo   |
+| ㅖ              | ye    |
+| ㅗ              | o     |
+| ㅘ              | wa    |
+| ㅙ              | wae   |
+| ㅚ              | oe    |
+| ㅛ              | yo    |
+| ㅜ              | u     |
+| ㅝ              | wo    |
+| ㅞ              | we    |
+| ㅟ              | wi    |
+| ㅠ              | yu    |
+| ㅡ              | eu    |
+| ㅢ              | ui    |
+| ㅣ              | i     |
 
 ### Coda
 
@@ -97,6 +97,13 @@ This is not perfect for Korean pronunciation because the phonological process is
 ## Usage
 
 ```python
+import pandas as pd
+from kor2eng import kor_romanizied
+
+from dask import dataframe as dd
+from dask.multiprocessing import get
+from multiprocessing import cpu_count
+
 # Import data set --------------------------------------------------
 korean_words = pd.DataFrame({"KOREAN": ["안녕하세요",
                                         "감사합니다",
@@ -110,9 +117,15 @@ nCores = cpu_count()
 romanized_string = dd.from_pandas(korean_words, npartitions=nCores).\
    map_partitions(
       lambda df : df.apply(
-         lambda x : split_kor(x.KOREAN), axis=1)).\
+         lambda x : kor_romanizied.split_kor(x.KOREAN), axis=1)).\
    compute(scheduler='processes')
 
 korean_words["ROMANIZED"] = romanized_string
+
+print(korean_words)
+#   KOREAN           MEANING            ROMANIZED
+# 0  안녕하세요                Hi  an-nyeong-ha-se-yo-
+# 1  감사합니다         Thank you    gam-sa-hap-ni-da-
+# 2  반갑습니다  Nice to meet you  ban-gap-seup-ni-da-
 ```
 

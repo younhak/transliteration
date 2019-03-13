@@ -1,6 +1,4 @@
 # Import Library --------------------------------------------------------------
-from autocoding import objsave
-
 import re
 
 from dask import dataframe as dd
