@@ -7,7 +7,7 @@ This is not perfect for Korean pronunciation because the phonological process is
 
 ## Characteristic of Korean Character
 
-![](img/hanguel.png)
+![hanguel](https://user-images.githubusercontent.com/40286691/54249090-48be3200-4582-11e9-962e-6259641d5bbf.png)
 
 ### Onset
 
