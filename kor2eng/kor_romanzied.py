@@ -1,4 +1,13 @@
+# Import Library --------------------------------------------------------------
+from autocoding import objsave
+
 import re
+
+from dask import dataframe as dd
+from dask.multiprocessing import get
+from multiprocessing import cpu_count
+
+# Romanized Function ----------------------------------------------------------
 
 BASE_CODE, CHOSUNG, JUNGSUNG = 44032, 588, 28
 
